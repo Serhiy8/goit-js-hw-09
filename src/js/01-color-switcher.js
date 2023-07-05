@@ -13,7 +13,7 @@ const refs = {
 refs.startBtn.addEventListener('click', onStartPush);
 refs.stopBtn.addEventListener('click', onStopPush);
 
-let interval;
+let interval = null;
 
 function changeBodyColor() {
   refs.body.style.backgroundColor = getRandomHexColor();
