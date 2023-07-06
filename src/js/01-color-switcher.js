@@ -13,18 +13,21 @@ const refs = {
 refs.startBtn.addEventListener('click', onStartPush);
 refs.stopBtn.addEventListener('click', onStopPush);
 
-let interval = null;
+refs.stopBtn.disabled = true;
+let timeoutId = null;
 
 function changeBodyColor() {
   refs.body.style.backgroundColor = getRandomHexColor();
 }
 
 function onStartPush() {
-  refs.startBtn.setAttribute('disabled', '');
-  interval = setInterval(changeBodyColor, 1000);
+  refs.startBtn.disabled = true;
+  refs.stopBtn.disabled = false;
+  timeoutId = setInterval(changeBodyColor, 1000);
 }
 
 function onStopPush() {
-  refs.startBtn.removeAttribute('disabled');
-  clearInterval(interval);
+  refs.startBtn.disabled = false;
+  refs.stopBtn.disabled = true;
+  clearInterval(timeoutId);
 }
