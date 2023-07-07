@@ -24,7 +24,7 @@ const options = flatpickr(refs.input, {
     const selectedTime = selectedDates[0].getTime();
     currentTime = Date.now();
     if (selectedTime <= currentTime) {
-      check();
+      checkDate();
       return;
     } else {
       refs.startBtn.disabled = false;
@@ -36,12 +36,17 @@ refs.startBtn.addEventListener('click', startTimer);
 
 function startTimer() {
   refs.startBtn.disabled = true;
-  intervalId = setInterval(() => {
+  intervalId = setTheInterval();
+}
+
+function setTheInterval() {
+  setInterval(() => {
     const differentTime = options.selectedDates[0].getTime() - currentTime;
     currentTime = Date.now();
 
     if (differentTime < 0) {
       clearInterval(intervalId);
+      refs.startBtn.removeEventListener('click', startTimer);
       return Notiflix.Notify.success('Час закінчено. Вітаю!🥳');
     }
     const { days, hours, minutes, seconds } = convertMs(differentTime);
@@ -75,7 +80,7 @@ function changeTime({ days, hours, minutes, seconds }) {
   refs.seconds.textContent = addLeadingZero(seconds);
 }
 
-function check() {
+function checkDate() {
   Notiflix.Confirm.ask(
     'Вибери дату більшу ніж поточна!',
     "Напиши 'ок' якщо зрозумів",
