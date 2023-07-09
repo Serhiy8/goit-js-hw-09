@@ -24,7 +24,7 @@ refs.form.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
   const firrstDelay = Number(refs.delayInput.value);
-  const step = Number(refs.delayInput.value);
+  const step = Number(refs.stepInput.value);
   const amount = Number(refs.amountInput.value);
 
   let startDelay = firrstDelay;
