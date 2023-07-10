@@ -36,11 +36,7 @@ refs.startBtn.addEventListener('click', startTimer);
 
 function startTimer() {
   refs.startBtn.disabled = true;
-  intervalId = setTheInterval();
-}
-
-function setTheInterval() {
-  setInterval(() => {
+  intervalId = setInterval(() => {
     const differentTime = options.selectedDates[0].getTime() - currentTime;
     currentTime = Date.now();
 
