@@ -20,6 +20,8 @@ const refs = {
   amountInput: document.querySelector('[name="amount"]'),
 };
 
+refs.form.addEventListener('submit', startPromise); //Створюємо подію
+
 function getValues() {
   const firstDelay = Number(refs.delayInput.value);
   const step = Number(refs.stepInput.value);
@@ -28,7 +30,7 @@ function getValues() {
   return { firstDelay, step, amount };
 }
 
-refs.form.addEventListener('submit', function (evt) {
+function startPromise(evt) {
   evt.preventDefault();
 
   const { firstDelay, step, amount } = getValues();
@@ -51,4 +53,4 @@ refs.form.addEventListener('submit', function (evt) {
     startDelay += step;
   }
   refs.form.reset();
-});
+}
