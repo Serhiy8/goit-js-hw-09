@@ -38,19 +38,16 @@ function startPromise(evt) {
   let startDelay = firstDelay;
 
   for (let i = 1; i <= amount; i += 1) {
-    createPromise(i, startDelay)
-      .then(({ position, delay }) => {
-        Notiflix.Notify.success(
-          `✅ Fulfilled promise ${position} in ${delay}ms`
-        );
-      })
-      .catch(({ position, delay }) => {
-        Notiflix.Notify.failure(
-          `❌ Rejected promise ${position} in ${delay}ms`
-        );
-      });
+    createPromise(i, startDelay).then(onPromiseError).catch(onPromiseSuccess);
 
     startDelay += step;
   }
   refs.form.reset();
+}
+
+function onPromiseSuccess({ position, delay }) {
+  Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+}
+function onPromiseError({ position, delay }) {
+  Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
 }
